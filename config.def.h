@@ -2,11 +2,11 @@
 
 /* appearance */
 static const char font[]            = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#cccccc";
-static const char normbgcolor[]     = "#cccccc";
-static const char normfgcolor[]     = "#000000";
-static const char selbordercolor[]  = "#0066ff";
-static const char selbgcolor[]      = "#0066ff";
+static const char normbordercolor[] = "#000000";
+static const char normbgcolor[]     = "#333333";
+static const char normfgcolor[]     = "#cccccc";
+static const char selbordercolor[]  = "#000000";
+static const char selbgcolor[]      = "#666699";
 static const char selfgcolor[]      = "#ffffff";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -55,6 +55,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
+static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -94,7 +95,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_Tab,    rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
 	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,     {0} },
 	{ MODKEY|ControlMask,           XK_h,      shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
-	{ MODKEY|ControlMask,           XK_l,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
+	/* { MODKEY|ControlMask,           XK_l,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
+	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },   /* increase the number of tiled clients in the master area */
 };
 
 /* button definitions */
