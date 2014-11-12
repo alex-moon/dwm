@@ -26,10 +26,11 @@ static const Rule rules[] = {
 	{ "Thunderbird",  NULL,       NULL,       1 << 1,       False,       -1 },
 	{ "Pidgin",       NULL,       NULL,       1 << 1,       False,       -1 },
 	{ "Firefox",      NULL,       NULL,       1 << 2,       False,       -1 },
+	{ "Xmessage",     NULL,       NULL,       0,            True,        -1 },
 };
 
 /* layout(s) */
-static const float mfact      = 0.35; /* factor of master area size [0.05..0.95] */
+static const float mfact      = 0.75; /* factor of master area size [0.05..0.95] */
 static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
 static const int layoutaxis[] = {
 	1,    /* layout axis: 1 = x, 2 = y; negative values mirror the layout, setting the master area to the right / bottom instead of left / top */
@@ -59,6 +60,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
 static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
+static const char *shortcutscmd[]  = { "xmessage", "-center", "-default", "okay", "-file", "/tmp/shortcuts.txt", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -75,7 +77,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -96,8 +98,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_d,      rotatelayoutaxis, {.i = 0} },    /* 0 = layout axis */
-	{ MODKEY|ControlMask|ShiftMask, XK_d,    rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
-	{ MODKEY|ControlMask,           XK_d,    rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
+	{ MODKEY|ControlMask|ShiftMask, XK_d,      rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
+	{ MODKEY|ControlMask,           XK_d,      rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
 	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,     {0} },
 	{ MODKEY|ControlMask,           XK_x,      shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
 	{ MODKEY|ControlMask,           XK_z,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */

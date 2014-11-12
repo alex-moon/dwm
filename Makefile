@@ -46,10 +46,8 @@ install: all
 	@mkdir -p ${DESTDIR}${PREFIX}/bin
 	@cp -f dwm ${DESTDIR}${PREFIX}/bin
 	@cp -f dwm.sh ${DESTDIR}${PREFIX}/bin
-	@cp -f shortcuts.sh ${DESTDIR}${PREFIX}/bin/s
 	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
 	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm.sh
-	@chmod 755 ${DESTDIR}${PREFIX}/bin/s
 	@echo installing manual page to ${DESTDIR}${MANPREFIX}/man1
 	@mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	@sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
