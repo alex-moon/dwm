@@ -71,14 +71,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_a,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_s,      movestack,      {.i = -1 } },
-	{ MODKEY,                       XK_z,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_x,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_z,      setlayout,      {.v = &layouts[0]} },  // tiling layout
+	{ MODKEY,                       XK_x,      setlayout,      {.v = &layouts[2]} },  // master layout
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -101,9 +100,10 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_d,      rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
 	{ MODKEY|ControlMask,           XK_d,      rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
 	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,     {0} },
-	{ MODKEY|ControlMask,           XK_x,      shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
-	{ MODKEY|ControlMask,           XK_z,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
-	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },   /* increase the number of tiled clients in the master area */
+	{ MODKEY|ShiftMask,             XK_Right,  shiftmastersplit, {.i = -1} },   /* master -> stack */
+	{ MODKEY|ShiftMask,             XK_Left,   shiftmastersplit, {.i = +1} },   /* stack -> master */
+	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
+	{ MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
 };
 
 /* button definitions */

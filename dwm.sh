@@ -23,10 +23,13 @@ alt + A			previous tile
 alt + shift + S		shift to next tile
 alt + shift + A		shift to previous tile
 
-alt + Z			make stack bigger
-alt + X			make stack smaller
-alt + ctrl + Z		stack -> master
-alt + ctrl + X		master -> stack
+alt + Z			tiling mode (default)
+alt + X			fullscreen master
+
+alt + left		make stack bigger
+alt + right		make stack smaller
+alt + ctrl + left	stack -> master
+alt + ctrl + right	master -> stack
 
 alt + D			toggle stack h/v
 alt + ctrl + D		rotate stack
@@ -34,6 +37,7 @@ alt + ctrl + shift + D	rotate master
 
 alt + [num]		switch to tag
 alt + P			launcher
+alt + F			shortcuts (i.e. THIS!)
 alt + ctrl + L		lock screen
 alt + shift + Q		log out
 EOF
