@@ -19,7 +19,9 @@ alt + ctrl + D		rotate stack
 alt + ctrl + shift + D	rotate master
 
 alt + [num]		switch to tag
-alt + ctrl + l		lock screen
+alt + P			launcher
+alt + ctrl + L		lock screen
+alt + shift + Q		log out
 
 
 EOF
