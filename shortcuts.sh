@@ -1,3 +1,4 @@
+cat <<EOF
 alt + Q			previous screen
 alt + W			next screen
 alt + shift + Q		shift to previous screen
@@ -13,9 +14,12 @@ alt + X			make stack smaller
 alt + ctrl + Z		add tile to master
 alt + ctrl + X		remove tile from master
 
-alt + D			toggle stack horizontal/vertical
+alt + D			toggle stack h/v
 alt + ctrl + D		rotate stack
 alt + ctrl + shift + D	rotate master
 
 alt + [num]		switch to tag
 alt + ctrl + l		lock screen
+
+
+EOF
