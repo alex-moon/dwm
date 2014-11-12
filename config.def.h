@@ -99,8 +99,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_d,    rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
 	{ MODKEY|ControlMask,           XK_d,    rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
 	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,     {0} },
-	{ MODKEY|ControlMask,           XK_z,      shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
-	{ MODKEY|ControlMask,           XK_x,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
+	{ MODKEY|ControlMask,           XK_x,      shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
+	{ MODKEY|ControlMask,           XK_z,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },   /* increase the number of tiled clients in the master area */
 };
 

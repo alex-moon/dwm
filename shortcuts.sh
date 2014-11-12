@@ -11,8 +11,8 @@ alt + shift + A		shift to previous tile
 
 alt + Z			make stack bigger
 alt + X			make stack smaller
-alt + ctrl + Z		add tile to master
-alt + ctrl + X		remove tile from master
+alt + ctrl + Z		stack -> master
+alt + ctrl + X		master -> stack
 
 alt + D			toggle stack h/v
 alt + ctrl + D		rotate stack
