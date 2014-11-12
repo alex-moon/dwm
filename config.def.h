@@ -21,8 +21,10 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
+	{ "Gimp",         NULL,       NULL,       0,            True,        -1 },
+	{ "Thunderbird",  NULL,       NULL,       1 << 1,       False,       -1 },
+	{ "Pidgin",       NULL,       NULL,       1 << 1,       False,       -1 },
+	{ "Firefox",      NULL,       NULL,       1 << 2,       False,       -1 },
 };
 
 /* layout(s) */
@@ -62,10 +64,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_a,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_s,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_z,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_x,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -76,10 +78,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_q,      focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_w,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_q,      tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_w,      tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -90,12 +92,12 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ControlMask,           XK_t,      rotatelayoutaxis, {.i = 0} },    /* 0 = layout axis */
+	{ MODKEY|ControlMask,           XK_d,      rotatelayoutaxis, {.i = 0} },    /* 0 = layout axis */
 	{ MODKEY|ControlMask,           XK_Tab,    rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
 	{ MODKEY|ControlMask|ShiftMask, XK_Tab,    rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
 	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,     {0} },
-	{ MODKEY|ControlMask,           XK_h,      shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
-	{ MODKEY|ControlMask,           XK_k,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
+	{ MODKEY|ControlMask,           XK_z,      shiftmastersplit, {.i = -1} },   /* reduce the number of tiled clients in the master area */
+	{ MODKEY|ControlMask,           XK_x,      shiftmastersplit, {.i = +1} },   /* increase the number of tiled clients in the master area */
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },   /* increase the number of tiled clients in the master area */
 };
 
