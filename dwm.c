@@ -678,6 +678,16 @@ dirtomon(int dir) {
 	return m;
 }
 
+Monitor *
+idxtomon(unsigned int n) {
+	unsigned int i;
+	Monitor *m;
+
+	for(m = mons, i = 0; m && i != n; m = m->next, i++);
+
+	return m;
+}
+
 void
 drawbar(Monitor *m) {
 	int x;
