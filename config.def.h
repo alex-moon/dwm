@@ -18,6 +18,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 /* include(s) depending on the tags array */
 #include "flextile.h"
+#include "movestack.c"
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
@@ -66,6 +67,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_a,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_s,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_a,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_s,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_z,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_x,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
