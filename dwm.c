@@ -153,6 +153,7 @@ static void detach(Client *c);
 static void detachstack(Client *c);
 static void die(const char *errstr, ...);
 static Monitor *dirtomon(int dir);
+static Monitor *idxtomon(unsigned int n);
 static void drawbar(Monitor *m);
 static void drawbars(void);
 static void drawsquare(Bool filled, Bool empty, Bool invert, unsigned long col[ColLast]);
@@ -849,7 +850,7 @@ focusmon(const Arg *arg) {
 
 	if(!mons->next)
 		return;
-	if((m = dirtomon(arg->i)) == selmon)
+	if((m = idxtomon(arg->i)) == selmon)
 		return;
 	unfocus(selmon->sel, True);
 	selmon = m;
@@ -1615,7 +1616,7 @@ void
 tagmon(const Arg *arg) {
 	if(!selmon->sel || !mons->next)
 		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
+	sendmon(selmon->sel, idxtomon(arg->i));
 }
 
 int
