@@ -3,7 +3,7 @@
 dwm &
 
 xset r rate 200 120
-feh --bg-scale /home/moona/Desktop/desktop.jpg
+feh --bg-fill /home/moona/Desktop/desktop.jpg
 setxkbmap -layout gb
 xscreensaver -no-splash &
 
