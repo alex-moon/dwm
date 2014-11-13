@@ -23,8 +23,8 @@ alt + A			previous tile
 alt + shift + S		shift to next tile
 alt + shift + A		shift to previous tile
 
-alt + Z			tiling mode (default)
-alt + X			fullscreen master
+alt + X			fullscreen
+alt + Z			tiled (default)
 
 alt + Left		make stack bigger
 alt + Right		make stack smaller
