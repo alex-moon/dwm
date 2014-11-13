@@ -65,7 +65,6 @@ static const char *shortcutscmd[]  = { "xmessage", "-center", "-default", "okay"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_a,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_s,      focusstack,     {.i = -1 } },
@@ -98,8 +97,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_d,      rotatelayoutaxis, {.i = 0} },    /* 0 = layout axis */
 	{ MODKEY|ControlMask|ShiftMask, XK_d,      rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
-	{ MODKEY|ControlMask,           XK_d,      rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
-	{ MODKEY|ControlMask,           XK_Return, mirrorlayout,     {0} },
+	{ MODKEY|ShiftMask,           XK_d,      rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
+	{ MODKEY|ShiftMask,           XK_Return, mirrorlayout,     {0} },
 	{ MODKEY|ShiftMask,             XK_Right,  shiftmastersplit, {.i = -1} },   /* master -> stack */
 	{ MODKEY|ShiftMask,             XK_Left,   shiftmastersplit, {.i = +1} },   /* stack -> master */
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
