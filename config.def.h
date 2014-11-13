@@ -75,6 +75,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_a,      movestack,      {.i = -1 } },
     { MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
     { MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
+    { MODKEY,                       XK_Up,     setmfact,       {.f = -0.05} },
+    { MODKEY,                       XK_Down,   setmfact,       {.f = +0.05} },
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
     { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -103,6 +105,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_Return, mirrorlayout,     {0} },
     { MODKEY|ShiftMask,             XK_Right,  shiftmastersplit, {.i = -1} },   /* master -> stack */
     { MODKEY|ShiftMask,             XK_Left,   shiftmastersplit, {.i = +1} },   /* stack -> master */
+    { MODKEY|ShiftMask,             XK_Down,   shiftmastersplit, {.i = -1} },   /* master -> stack */
+    { MODKEY|ShiftMask,             XK_Up,     shiftmastersplit, {.i = +1} },   /* stack -> master */
     { MODKEY|ControlMask,           XK_q,      quit,           {0} },
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
