@@ -97,13 +97,13 @@ static Key keys[] = {
     TAGKEYS(                        XK_7,                      6)
     TAGKEYS(                        XK_8,                      7)
     TAGKEYS(                        XK_9,                      8)
-    { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     { MODKEY,                       XK_d,      rotatelayoutaxis, {.i = 0} },    /* 0 = layout axis */
     { MODKEY|ControlMask|ShiftMask, XK_d,      rotatelayoutaxis, {.i = 1} },    /* 1 = master axis */
     { MODKEY|ShiftMask,             XK_d,      rotatelayoutaxis, {.i = 2} },    /* 2 = stack axis */
     { MODKEY|ShiftMask,             XK_Return, mirrorlayout,     {0} },
     { MODKEY|ShiftMask,             XK_Right,  shiftmastersplit, {.i = -1} },   /* master -> stack */
     { MODKEY|ShiftMask,             XK_Left,   shiftmastersplit, {.i = +1} },   /* stack -> master */
+    { MODKEY|ControlMask,           XK_q,      quit,           {0} },
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },

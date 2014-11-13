@@ -41,7 +41,7 @@ alt + F                 shortcuts (i.e. THIS!)
 alt + ctrl + Enter      terminator
 alt + ctrl + L          lock screen
 alt + ctrl + M          SUPER DEV KEY!
-alt + shift + Q         log out
+alt + ctrl + Q          log out
 EOF
 
 while true; do
