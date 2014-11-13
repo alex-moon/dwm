@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cmds="gedit terminator firefox thunderbird pidgin sublime"
+
+cleanup() {
+  for cmd in ${cmds[@]}; do
+    echo "Killing $cmd..."
+    ps aux | grep $cmd | awk '{ print $2 }' | xargs kill
+  done
+}
+
+trap cleanup EXIT HUP INT QUIT PIPE TERM
+
+for cmd in ${cmds[@]}; do
+  exec $cmd &
+done
+
+while true; do sleep 3600; done
+

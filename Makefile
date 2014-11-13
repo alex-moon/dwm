@@ -45,9 +45,13 @@ install: all
 	@echo installing executable file to ${DESTDIR}${PREFIX}/bin
 	@mkdir -p ${DESTDIR}${PREFIX}/bin
 	@cp -f dwm ${DESTDIR}${PREFIX}/bin
-	@cp -f dwm.sh ${DESTDIR}${PREFIX}/bin
+	@cp -f dwm-wrapper ${DESTDIR}${PREFIX}/bin
+	@cp -f super-dev-key ${DESTDIR}${PREFIX}/bin
+	@cp -f super-shortcuts-key ${DESTDIR}${PREFIX}/bin
 	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
-	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm.sh
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm-wrapper
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/super-dev-key
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/super-shortcuts-key
 	@echo installing manual page to ${DESTDIR}${MANPREFIX}/man1
 	@mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	@sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
