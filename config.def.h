@@ -106,6 +106,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_Left,   shiftmastersplit, {.i = +1} },   /* stack -> master */
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
+    { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
 };
 
