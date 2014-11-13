@@ -1,3 +1,3 @@
 #!/bin/bash
-xmessage -center -buttons "Got it":0,"Shutdown":1 -default "Got it" -file /tmp/shortcuts.txt
+xmessage -nearmouse -buttons "Got it":0,"Shutdown - $(whoami)":1 -default "Got it" -file /tmp/shortcuts.txt
 if (( $? == 1 )); then halt; fi
