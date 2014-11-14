@@ -61,6 +61,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
+static const char *settingscmd[]  = { "gnome-control-center", NULL };
 static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 static const char *shortcutscmd[]  = { "super-shortcuts-key", NULL };
 static const char *superdevcmd[] = { "super-dev-key", NULL };
@@ -109,6 +110,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_Up,     shiftmastersplit, {.i = +1} },   /* stack -> master */
     { MODKEY|ControlMask,           XK_q,      quit,           {0} },
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
+    { MODKEY|ControlMask,           XK_c,      spawn,          {.v = settingscmd } },  /* lock screen */
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
