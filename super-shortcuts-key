@@ -1,3 +1,3 @@
 #!/bin/bash
-xmessage -nearmouse -buttons "Got it":0,"Shutdown - $(whoami)":1 -default "Got it" -file /tmp/shortcuts.txt
-if (( $? == 1 )); then shutdown -a now; fi
+xmessage -nearmouse -buttons "Got it":0,"Shutdown":1 -default "Got it" -file /tmp/shortcuts.txt
+if (( $? == 1 )); then sudo halt; fi
