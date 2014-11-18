@@ -1,5 +1,6 @@
 #!/bin/bash
 xmessage -nearmouse -buttons "Got it":0,"Halt":1,"Reboot":2 -default "Got it" -file /tmp/shortcuts.txt
-if (( $? == 1 )); then sudo halt
-elif (( $? == 2 )); then sudo reboot
+button=$?
+if (( $button == 1 )); then sudo halt
+elif (( $button == 2 )); then sudo reboot
 fi
