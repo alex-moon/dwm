@@ -65,6 +65,7 @@ static const char *settingscmd[]  = { "gnome-control-center", NULL };
 static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 static const char *shortcutscmd[]  = { "super-shortcuts-key", NULL };
 static const char *superdevcmd[] = { "super-dev-key", NULL };
+static const char *refreshmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
 static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
 
@@ -116,6 +117,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
+    { MODKEY,                       XK_r,      spawn,          {.v = refreshmoncmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = volumedowncmd } },
     { MODKEY,                       XK_v,      spawn,          {.v = volumeupcmd } },
 };
