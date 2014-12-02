@@ -38,6 +38,7 @@
 #include <X11/Xutil.h>
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
+#include <X11/extensions/Xrandr.h>
 #endif /* XINERAMA */
 
 /* macros */
@@ -189,6 +190,7 @@ static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
 static void restack(Monitor *m);
 static void run(void);
+static void rrscreenchangenotify(void);
 static void scan(void);
 static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
@@ -238,6 +240,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[ClientMessage] = clientmessage,
 	[ConfigureRequest] = configurerequest,
 	[ConfigureNotify] = configurenotify,
+	[RRScreenChangeNotify] = rrscreenchangenotify,
 	[DestroyNotify] = destroynotify,
 //	[EnterNotify] = enternotify,
 	[Expose] = expose,
@@ -1457,6 +1460,14 @@ run(void) {
 		if(handler[ev.type])
 			handler[ev.type](&ev); /* call handler */
 	}
+}
+
+void
+rrscreenchangenotify(void) {
+	fprintf(stderr, "dwm: poopy fuck butts lol shits");
+	char *poo[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
+	Arg butt = {.v = poo};
+	spawn (&butt);
 }
 
 void
