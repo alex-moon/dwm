@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dwm &
+dwm > /var/log/dwm/dwm.log 2> /var/log/dwm/error.log &
 
 xset r rate 200 120
 feh --bg-fill /home/moona/Desktop/desktop.jpg
