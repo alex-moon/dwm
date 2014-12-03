@@ -190,7 +190,7 @@ static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
 static void restack(Monitor *m);
 static void run(void);
-static void rrscreenchangenotify(void);
+static void rrscreenchangenotify(XEvent *e);
 static void scan(void);
 static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
@@ -240,7 +240,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[ClientMessage] = clientmessage,
 	[ConfigureRequest] = configurerequest,
 	[ConfigureNotify] = configurenotify,
-	[RRScreenChangeNotify] = rrscreenchangenotify,
+	[RRScreenChangeNotifyEvent] = rrscreenchangenotify,
 	[DestroyNotify] = destroynotify,
 //	[EnterNotify] = enternotify,
 	[Expose] = expose,
@@ -1463,7 +1463,7 @@ run(void) {
 }
 
 void
-rrscreenchangenotify(void) {
+rrscreenchangenotify(XEvent *e) {
 	fprintf(stderr, "dwm: poopy fuck butts lol shits");
 	char *poo[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
 	Arg butt = {.v = poo};
@@ -1599,6 +1599,9 @@ setup(void) {
 	                |PropertyChangeMask;
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
+#ifdef XINERAMA
+	// XRRSelectInput(dpy, root, RRScreenChangeNotifyMask);
+#endif /* XINERAMA */
 	grabkeys();
 }
 
