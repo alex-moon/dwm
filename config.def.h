@@ -68,6 +68,7 @@ static const char *superdevcmd[] = { "super-dev-key", NULL };
 static const char *refreshmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
 static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
+static const char *fmcmd[] = { "pcmanfm", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
@@ -115,6 +116,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
     { MODKEY|ControlMask,           XK_c,      spawn,          {.v = settingscmd } },  /* lock screen */
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
+    { MODKEY|ControlMask,           XK_f,      spawn,          {.v = fmcmd } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
     { MODKEY,                       XK_r,      spawn,          {.v = refreshmoncmd } },
