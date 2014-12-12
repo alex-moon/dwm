@@ -46,6 +46,7 @@ alt + ctrl + Enter      terminator
 alt + ctrl + L          lock screen
 alt + ctrl + C          control center
 alt + ctrl + F          file manager
+alt + ctrl + W          web browser
 alt + ctrl + M          SUPER DEV KEY!
 alt + ctrl + Q          log out
 EOF

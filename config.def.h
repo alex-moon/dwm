@@ -69,6 +69,7 @@ static const char *refreshmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary
 static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
 static const char *fmcmd[] = { "pcmanfm", NULL };
+static const char *webcmd[] = { "firefox", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
@@ -117,6 +118,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_c,      spawn,          {.v = settingscmd } },  /* lock screen */
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
     { MODKEY|ControlMask,           XK_f,      spawn,          {.v = fmcmd } },
+    { MODKEY|ControlMask,           XK_w,      spawn,          {.v = webcmd } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
     { MODKEY,                       XK_r,      spawn,          {.v = refreshmoncmd } },
