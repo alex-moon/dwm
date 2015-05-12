@@ -29,6 +29,8 @@ static const Rule rules[] = {
     { "Xmessage",     NULL,       NULL,       0,            True,        -1 },
     { "Sublime",      NULL,       NULL,       1,            False,       1  },
     { "Gedit",        NULL,       NULL,       1,            False,       0  },
+    { "Audacious",    NULL,       NULL,       4,            False,       0  },
+    { "Eclipse",      NULL,       NULL,       2,            False,       0  },
 };
 
 /* layout(s) */
@@ -65,7 +67,8 @@ static const char *settingscmd[]  = { "gnome-control-center", NULL };
 static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 static const char *shortcutscmd[]  = { "super-shortcuts-key", NULL };
 static const char *superdevcmd[] = { "super-dev-key", NULL };
-static const char *refreshmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
+static const char *newsuperdevcmd[] = { "new-super-dev-key", NULL };
+static const char *refreshmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--left-of", "LVDS1", "--auto", NULL };
 static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
 static const char *fmcmd[] = { "pcmanfm", NULL };
