@@ -34,6 +34,7 @@
 #include <X11/keysym.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#include <X11/XKBlib.h>
 #include <X11/Xproto.h>
 #include <X11/Xutil.h>
 #ifdef XINERAMA
@@ -154,7 +155,10 @@ static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
 static void die(const char *errstr, ...);
-static Monitor *dirtomon(int dir);
+// dirtomon() handles iterating back and forth through monitors
+// @param dir as in "direction" - 1 for forward, -1 for backward
+// see http://git.suckless.org/dwm/tree/dwm.c#n677 for implementation if needed
+// static Monitor *dirtomon(int dir);
 static Monitor *idxtomon(unsigned int n);
 static void drawbar(Monitor *m);
 static void drawbars(void);
@@ -677,23 +681,6 @@ die(const char *errstr, ...) {
 }
 
 Monitor *
-dirtomon(int dir) {
-	Monitor *m = NULL;
-
-	if(dir > 0) {
-		if(!(m = selmon->next))
-			m = mons;
-	}
-	else {
-		if(selmon == mons)
-			for(m = mons; m->next; m = m->next);
-		else
-			for(m = mons; m->next != selmon; m = m->next);
-	}
-	return m;
-}
-
-Monitor *
 idxtomon(unsigned int n) {
 	unsigned int i;
 	Monitor *m;
@@ -1022,12 +1009,10 @@ initfont(const char *fontstr) {
 		XFreeStringList(missing);
 	}
 	if(dc.font.set) {
-		XFontSetExtents *font_extents;
 		XFontStruct **xfonts;
 		char **font_names;
 
 		dc.font.ascent = dc.font.descent = 0;
-		font_extents = XExtentsOfFontSet(dc.font.set);
 		n = XFontsOfFontSet(dc.font.set, &xfonts, &font_names);
 		for(i = 0, dc.font.ascent = 0, dc.font.descent = 0; i < n; i++) {
 			dc.font.ascent = MAX(dc.font.ascent, (*xfonts)->ascent);
@@ -1080,7 +1065,7 @@ keypress(XEvent *e) {
 	XKeyEvent *ev;
 
 	ev = &e->xkey;
-	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
+	keysym = XkbKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0, 0);
 	for(i = 0; i < LENGTH(keys); i++)
 		if(keysym == keys[i].keysym
 		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
