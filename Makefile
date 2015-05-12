@@ -52,6 +52,7 @@ install: all
 	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
 	@chmod 755 ${DESTDIR}${PREFIX}/bin/dwm-wrapper
 	@chmod 755 ${DESTDIR}${PREFIX}/bin/super-dev-key
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/new-super-dev-key
 	@chmod 755 ${DESTDIR}${PREFIX}/bin/super-shortcuts-key
 	@echo installing manual page to ${DESTDIR}${MANPREFIX}/man1
 	@mkdir -p ${DESTDIR}${MANPREFIX}/man1
