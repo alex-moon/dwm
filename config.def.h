@@ -117,8 +117,10 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_Down,   shiftmastersplit, {.i = -1} },   /* master -> stack */
     { MODKEY|ShiftMask,             XK_Up,     shiftmastersplit, {.i = +1} },   /* stack -> master */
     { MODKEY|ControlMask,           XK_q,      quit,           {0} },
+
+    // custom shortcuts
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
-    { MODKEY|ControlMask,           XK_c,      spawn,          {.v = settingscmd } },  /* lock screen */
+    { MODKEY|ControlMask,           XK_a,      spawn,          {.v = settingscmd } },
     { MODKEY|ControlMask,           XK_m,      spawn,          {.v = superdevcmd } },
     { MODKEY|ControlMask,           XK_f,      spawn,          {.v = fmcmd } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = webcmd } },
