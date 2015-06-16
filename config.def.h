@@ -23,14 +23,15 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
     /* class      instance    title       tags mask     isfloating   monitor */
     { "Gimp",         NULL,       NULL,       0,            True,        -1 },
+    { "Xmessage",     NULL,       NULL,       0,            True,        -1 },
+    { "Java",         NULL,       NULL,       0,            True,        0  },
+    { "Sublime",      NULL,       NULL,       1 << 0,            False,       1  },
+    { "Gedit",        NULL,       NULL,       1 << 0,            False,       0  },
     { "Thunderbird",  NULL,       NULL,       1 << 1,       False,       0  },
     { "Pidgin",       NULL,       NULL,       1 << 1,       False,       0  },
+    { "Eclipse",      NULL,       NULL,       1 << 1,       False,       1  },
     { "Firefox",      NULL,       NULL,       1 << 2,       False,       -1 },
-    { "Xmessage",     NULL,       NULL,       0,            True,        -1 },
-    { "Sublime",      NULL,       NULL,       1,            False,       1  },
-    { "Gedit",        NULL,       NULL,       1,            False,       0  },
-    { "Audacious",    NULL,       NULL,       4,            False,       0  },
-    { "Eclipse",      NULL,       NULL,       2,            False,       0  },
+    { "Audacious",    NULL,       NULL,       1 << 3,       False,       0  },
 };
 
 /* layout(s) */
