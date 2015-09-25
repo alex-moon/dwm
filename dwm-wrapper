@@ -57,8 +57,17 @@ xrandr --addmode VGA1 1920x1080_60.00
 xrandr --output VGA1 --mode 1920x1080_60.00
 xrandr --output LVDS1 --primary --auto --output VGA1 --right-of LVDS1 --auto
 
+xroot() {
+    state=$(upower -i $(upower -e | grep 'BAT') | grep -E "state" | awk '{ print $2 }')
+    tofull=$(upower -i $(upower -e | grep 'BAT') | grep -E "to\ full" | awk '{ print $4 " " $5 }')
+    if [[ ! -z $tofull ]]; then tofull=" ($tofull)"; fi
+    percentage=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | awk '{ print $2 }')
+    date=$(date)
+    echo $percentage $state$tofull - $date
+}
+
 while true; do
-    xsetroot -name "`date`"
+    xsetroot -name "`xroot`"
     if [[ -z "$(ps -axo comm | grep dwm$)" ]]; then exit; fi
     sleep 1
 done
