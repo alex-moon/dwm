@@ -26,6 +26,7 @@ static const Rule rules[] = {
     { "Xmessage",     NULL,       NULL,       0,            True,        -1 },
     { "Java",         NULL,       NULL,       0,            True,        0  },
     { "Sublime",      NULL,       NULL,       1 << 0,       False,       1  },
+    { "Phpstorm",     NULL,       NULL,       1 << 0,       False,       1  },
     { "Gedit",        NULL,       NULL,       1 << 0,       False,       0  },
     { "Thunderbird",  NULL,       NULL,       1 << 1,       False,       0  },
     { "Pidgin",       NULL,       NULL,       1 << 4,       False,       0  },
