@@ -79,7 +79,7 @@ static const char *webcmd[] = { "firefox", NULL };
 /* monitor configurations */
 static const char *leftmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--left-of", "LVDS1", "--auto", NULL };
 static const char *rightmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
-static const char *nomoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", NULL };
+static const char *nomoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--off", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */

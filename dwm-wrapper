@@ -9,64 +9,36 @@ setxkbmap -layout gb
 xscreensaver -no-splash &
 
 cat > /tmp/shortcuts.txt <<EOF
-Move Between Screens
---------------------
-alt + Q                 previous screen
-alt + W                 next screen
-alt + shift + Q         shift to previous screen
-alt + shift + W         shift to next screen
+Move Between Screens                                    Move Between Tiles
+--------------------                                    ------------------
+alt + Q                 previous screen                 alt + S                 next tile
+alt + W                 next screen                     alt + A                 previous tile
+alt + shift + Q         shift to previous screen        alt + shift + S         shift to next tile
+alt + shift + W         shift to next screen            alt + shift + A         shift to previous tile
 
-Move Between Tiles
-------------------
-alt + S                 next tile
-alt + A                 previous tile
-alt + shift + S         shift to next tile
-alt + shift + A         shift to previous tile
-
-Maximise Tiles
---------------
-alt + X                 fullscreen
-alt + Z                 tiled (default)
-
-Stack/Master
-------------
-alt + Left              make stack bigger
-alt + Right             make stack smaller
+Stack/Master                                            Rotate Layout
+------------                                            -------------
+alt + X                 fullscreen                      alt + D                 toggle stack h/v
+alt + Z                 tiled (default)                 alt + shift + D         rotate stack
+alt + Left              make stack bigger               alt + ctrl + shift + D  rotate master
+alt + Right             make stack smaller              alt + shift + Enter     flip layout
 alt + shift + Left      stack -> master
-alt + shift + Right     master -> stack
-alt + Enter             swap to master
+alt + shift + Right     master -> stack                 Etcetera
+alt + Enter             swap to master                  --------
+                                                        alt + P                 launcher
+Monitor Configuration                                   alt + [num]             switch to tag
+---------------------                                   alt + C                 volume down
+alt + shift + Left      monitor on left                 alt + V                 volume up
+alt + shift + Right     monitor on right                alt + F                 shortcut sheet
+alt + shift + Down      no monitor                      alt + ctrl + Q          log out
 
-Rotate Layout
--------------
-alt + D                 toggle stack h/v
-alt + shift + D         rotate stack
-alt + ctrl + shift + D  rotate master
-alt + shift + Enter     flip layout
-
-Monitor Configuration
----------------------
-alt + shift + Left      monitor on left
-alt + shift + Right     monitor on right
-alt + shift + Down      no monitor
-
-Etcetera
---------
-alt + [num]             switch to tag
-alt + P                 launcher
-
-alt + C                 volume down
-alt + V                 volume up
-
-alt + F                 shortcuts (i.e. THIS!)
-
-alt + ctrl + Enter      terminator
-alt + ctrl + L          lock screen
+Quick-Launch                                            Super Dev Keys
+------------                                            --------------
+alt + ctrl + Enter      terminator                      alt + ctrl + M          PHP dev
+alt + ctrl + L          lock screen                     alt + ctrl + N          Java dev
 alt + ctrl + A          control center
 alt + ctrl + F          file manager
 alt + ctrl + W          web browser
-alt + ctrl + M          SUPER DEV KEY!
-alt + ctrl + N          new super dev key...
-alt + ctrl + Q          log out
 EOF
 
 xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
