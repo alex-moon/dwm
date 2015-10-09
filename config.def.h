@@ -71,11 +71,15 @@ static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 static const char *shortcutscmd[]  = { "super-shortcuts-key", NULL };
 static const char *superdevcmd[] = { "super-dev-key", NULL };
 static const char *newsuperdevcmd[] = { "new-super-dev-key", NULL };
-static const char *refreshmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--left-of", "LVDS1", "--auto", NULL };
 static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
 static const char *fmcmd[] = { "pcmanfm", NULL };
 static const char *webcmd[] = { "firefox", NULL };
+
+/* monitor configurations */
+static const char *leftmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--left-of", "LVDS1", "--auto", NULL };
+static const char *rightmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
+static const char *nomoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
@@ -130,9 +134,13 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = webcmd } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
-    { MODKEY,                       XK_r,      spawn,          {.v = refreshmoncmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = volumedowncmd } },
     { MODKEY,                       XK_v,      spawn,          {.v = volumeupcmd } },
+    // monitor configs
+    { MODKEY|ControlMask|ShiftMask, XK_Left,   spawn,          {.v = leftmoncmd } },
+    { MODKEY|ControlMask|ShiftMask, XK_Right,  spawn,          {.v = rightmoncmd } },
+    { MODKEY|ControlMask|ShiftMask, XK_Down,   spawn,          {.v = nomoncmd } },
+
 };
 
 /* button definitions */

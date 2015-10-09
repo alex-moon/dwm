@@ -9,31 +9,48 @@ setxkbmap -layout gb
 xscreensaver -no-splash &
 
 cat > /tmp/shortcuts.txt <<EOF
+Move Between Screens
+--------------------
 alt + Q                 previous screen
 alt + W                 next screen
 alt + shift + Q         shift to previous screen
 alt + shift + W         shift to next screen
 
+Move Between Tiles
+------------------
 alt + S                 next tile
 alt + A                 previous tile
 alt + shift + S         shift to next tile
 alt + shift + A         shift to previous tile
 
+Maximise Tiles
+--------------
 alt + X                 fullscreen
 alt + Z                 tiled (default)
 
+Stack/Master
+------------
 alt + Left              make stack bigger
 alt + Right             make stack smaller
 alt + shift + Left      stack -> master
 alt + shift + Right     master -> stack
+alt + Enter             swap to master
 
+Rotate Layout
+-------------
 alt + D                 toggle stack h/v
 alt + shift + D         rotate stack
 alt + ctrl + shift + D  rotate master
-
-alt + Enter             swap to master
 alt + shift + Enter     flip layout
 
+Monitor Configuration
+---------------------
+alt + shift + Left      monitor on left
+alt + shift + Right     monitor on right
+alt + shift + Down      no monitor
+
+Etcetera
+--------
 alt + [num]             switch to tag
 alt + P                 launcher
 
