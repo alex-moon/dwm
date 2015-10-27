@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cmds="gedit terminator firefox thunderbird pidgin phpstorm skype"
+cmds="gedit terminator firefox thunderbird phpstorm skype"
 
 cleanup() {
   for cmd in ${cmds[@]}; do
