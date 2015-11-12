@@ -75,6 +75,7 @@ static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", 
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
 static const char *fmcmd[] = { "pcmanfm", NULL };
 static const char *webcmd[] = { "firefox", NULL };
+static const char *fixkbcmd[] = { "fixkb", NULL };
 
 /* monitor configurations */
 static const char *leftmoncmd[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--left-of", "LVDS1", "--auto", NULL };
@@ -133,6 +134,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_f,      spawn,          {.v = fmcmd } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = webcmd } },
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
+    { MODKEY,                       XK_k,      spawn,          {.v = fixkbcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = volumedowncmd } },
     { MODKEY,                       XK_v,      spawn,          {.v = volumeupcmd } },
