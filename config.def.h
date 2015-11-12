@@ -31,6 +31,7 @@ static const Rule rules[] = {
     { "Thunderbird",  NULL,       NULL,       1 << 1,       False,       0  },
     { "Pidgin",       NULL,       NULL,       1 << 4,       False,       0  },
     { "Skype",        NULL,       NULL,       1 << 1,       False,       0  },
+    { "Slack",        NULL,       NULL,       1 << 1,       False,       0  },
     { "Eclipse",      NULL,       NULL,       1 << 1,       False,       1  },
     { "Firefox",      NULL,       NULL,       1 << 2,       False,       -1 },
     { "Audacious",    NULL,       NULL,       1 << 3,       False,       0  },
