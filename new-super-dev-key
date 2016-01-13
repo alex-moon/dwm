@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cmds="gedit terminator firefox eclipse audacious"
+cmds="gedit sublime terminator firefox eclipse audacious"
 
 cleanup() {
   for cmd in ${cmds[@]}; do
