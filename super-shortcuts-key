@@ -1,6 +1,8 @@
 #!/bin/bash
-xmessage -center -buttons "Got it":0,"Halt":2,"Reboot":4 -default "Got it" -file /tmp/shortcuts.txt
+xmessage -center -buttons "Got it":0,"Halt":2,"Reboot":4,"Suspend":8,"Hibernate":16 -default "Got it" -file /tmp/shortcuts.txt
 button=$?
 if (( $button == 2 )); then sudo halt
 elif (( $button == 4 )); then sudo reboot
+elif (( $button == 8 )); then sudo suspend
+elif (( $button == 16 )); then sudo hibernate
 fi
