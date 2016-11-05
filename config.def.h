@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
+static const char font[]            = "Terminus-9";
 static const char normbordercolor[] = "#000000";
 static const char normbgcolor[]     = "#333333";
 static const char normfgcolor[]     = "#cccccc";
@@ -67,7 +67,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
-static const char *settingscmd[]  = { "gnome-control-center", NULL };
+static const char *settingscmd[]  = { "unity-control-center", NULL };
 static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 static const char *shortcutscmd[]  = { "super-shortcuts-key", NULL };
 static const char *superdevcmd[] = { "super-dev-key", NULL };

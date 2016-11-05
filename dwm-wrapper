@@ -4,7 +4,7 @@ dwm > /var/log/dwm/dwm.log 2> /var/log/dwm/error.log &
 /opt/flux/xflux -l 51.5
 
 xset r rate 200 120
-feh --bg-fill /home/moona/Desktop/desktop.jpg
+feh --bg-fill /home/amoon/Desktop/desktop.jpg
 setxkbmap -layout gb
 xscreensaver -no-splash &
 
