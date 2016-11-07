@@ -1450,7 +1450,7 @@ run(void) {
 void
 rrscreenchangenotify(XEvent *e) {
 	fprintf(stderr, "dwm: poopy fuck butts lol shits");
-	char *poo[] = { "xrandr", "--output", "LVDS1", "--primary", "--auto", "--output", "VGA1", "--right-of", "LVDS1", "--auto", NULL };
+	char *poo[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "DPI-3", "--right-of", "eDP1", "--auto", NULL };
 	Arg butt = {.v = poo};
 	spawn (&butt);
 }

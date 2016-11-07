@@ -46,9 +46,9 @@ cat > /tmp/shortcuts.txt <<EOF
 EOF
 
 xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
-xrandr --addmode VGA1 1920x1080_60.00
-xrandr --output VGA1 --mode 1920x1080_60.00
-xrandr --output LVDS1 --primary --auto --output VGA1 --left-of LVDS1 --auto
+xrandr --addmode DPI-3 1920x1080_60.00
+xrandr --output DPI-3 --mode 1920x1080_60.00
+xrandr --output eDP1 --primary --auto --output DPI-3 --left-of eDP1 --auto
 
 xroot() {
     state=$(upower -i $(upower -e | grep 'BAT') | grep -E "state" | awk '{ print $2 }')
