@@ -72,6 +72,8 @@ static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 static const char *shortcutscmd[]  = { "super-shortcuts-key", NULL };
 static const char *superdevcmd[] = { "super-dev-key", NULL };
 static const char *newsuperdevcmd[] = { "new-super-dev-key", NULL };
+static const char *brightnessupcmd[] = { "brightness-up", NULL };
+static const char *brightnessdowncmd[] = { "brightness-down", NULL };
 static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
 static const char *fmcmd[] = { "pcmanfm", NULL };
@@ -137,6 +139,8 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_k,      spawn,          {.v = fixkbcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
+    { MODKEY,                       XK_comma,  spawn,          {.v = brightnessdowncmd } },
+    { MODKEY,                       XK_period, spawn,          {.v = brightnessupcmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = volumedowncmd } },
     { MODKEY,                       XK_v,      spawn,          {.v = volumeupcmd } },
     // monitor configs
