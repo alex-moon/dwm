@@ -127,7 +127,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_Left,   shiftmastersplit, {.i = +1} },   /* stack -> master */
     { MODKEY|ShiftMask,             XK_Down,   shiftmastersplit, {.i = -1} },   /* master -> stack */
     { MODKEY|ShiftMask,             XK_Up,     shiftmastersplit, {.i = +1} },   /* stack -> master */
-    { MODKEY|ControlMask,           XK_q,      quit,           {0} },
+    // { MODKEY|ControlMask,           XK_q,      quit,           {0} },
 
     // custom shortcuts
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },  /* lock screen */
@@ -139,8 +139,8 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_k,      spawn,          {.v = fixkbcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
-    { MODKEY,                       XK_Comma,  spawn,          {.v = brightnessdowncmd } },
-    { MODKEY,                       XK_Period, spawn,          {.v = brightnessupcmd } },
+    { MODKEY,                       XK_comma,  spawn,          {.v = brightnessdowncmd } },
+    { MODKEY,                       XK_period, spawn,          {.v = brightnessupcmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = volumedowncmd } },
     { MODKEY,                       XK_v,      spawn,          {.v = volumeupcmd } },
     // monitor configs
