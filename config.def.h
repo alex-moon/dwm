@@ -139,8 +139,8 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_k,      spawn,          {.v = fixkbcmd } },
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
-    { MODKEY,                       XK_comma,  spawn,          {.v = brightnessdowncmd } },
-    { MODKEY,                       XK_period, spawn,          {.v = brightnessupcmd } },
+    { MODKEY,                       XK_n,      spawn,          {.v = brightnessdowncmd } },
+    { MODKEY,                       XK_m,      spawn,          {.v = brightnessupcmd } },
     { MODKEY,                       XK_c,      spawn,          {.v = volumedowncmd } },
     { MODKEY,                       XK_v,      spawn,          {.v = volumeupcmd } },
     // monitor configs

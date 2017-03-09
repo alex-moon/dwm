@@ -31,8 +31,8 @@ cat > /tmp/shortcuts.txt <<EOF
     Monitor Configuration                                   alt + [num]             switch to tag
     ---------------------                                   alt + C                 volume down
     alt + shift + Left      monitor on left                 alt + V                 volume up
-    alt + shift + Right     monitor on right                alt + ,                 brightness down
-    alt + shift + Down      no monitor                      alt + .                 brightness up
+    alt + shift + Right     monitor on right                alt + n                 brightness down
+    alt + shift + Down      no monitor                      alt + m                 brightness up
 
     Quick-Launch                                            Super Dev Keys
     ------------                                            --------------
