@@ -81,9 +81,9 @@ static const char *webcmd[] = { "firefox", NULL };
 static const char *fixkbcmd[] = { "fixkb", NULL };
 
 /* monitor configurations */
-static const char *leftmoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "DP1-3", "--left-of", "eDP1", "--auto", NULL };
-static const char *rightmoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "DP1-3", "--right-of", "eDP1", "--auto", NULL };
-static const char *nomoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "DP1-3", "--off", NULL };
+static const char *leftmoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "HDMI1", "--left-of", "eDP1", "--auto", NULL };
+static const char *rightmoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "HDMI1", "--right-of", "eDP1", "--auto", NULL };
+static const char *nomoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "HDMI1", "--off", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
