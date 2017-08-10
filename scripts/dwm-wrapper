@@ -6,7 +6,7 @@ dwm > /var/log/dwm/dwm.log 2> /var/log/dwm/error.log &
 xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
 xrandr --addmode HDMI1 1920x1080_60.00
 xrandr --output HDMI1 --mode 1920x1080_60.00
-xrandr --output eDP1 --primary --auto --output HDMI1 --right-of eDP1 --auto
+xrandr-auto right
 
 xset r rate 200 120
 feh --bg-fill /home/amoon/Desktop/desktop.jpg
