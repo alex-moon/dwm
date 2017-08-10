@@ -21,20 +21,21 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 #include "movestack.c"
 
 static const Rule rules[] = {
-    /* class      instance    title       tags mask     isfloating   monitor */
-    { "Gimp",         NULL,       NULL,       0,            True,        -1 },
-    { "Xmessage",     NULL,       NULL,       0,            True,        -1 },
-    { "Java",         NULL,       NULL,       0,            True,        0  },
-    { "Sublime",      NULL,       NULL,       1 << 0,       False,       1  },
-    { "Phpstorm",     NULL,       NULL,       1 << 0,       False,       1  },
-    { "Gedit",        NULL,       NULL,       1 << 0,       False,       0  },
-    { "Thunderbird",  NULL,       NULL,       1 << 1,       False,       0  },
-    { "Pidgin",       NULL,       NULL,       1 << 4,       False,       0  },
-    { "Skype",        NULL,       NULL,       1 << 1,       False,       0  },
-    { "Slack",        NULL,       NULL,       1 << 1,       False,       0  },
-    { "Eclipse",      NULL,       NULL,       1 << 1,       False,       1  },
-    { "Firefox",      NULL,       NULL,       1 << 2,       False,       -1 },
-    { "Audacious",    NULL,       NULL,       1 << 3,       False,       0  },
+    /* class           instance    title       tags mask     isfloating   monitor */
+    { "Gimp",               NULL,       NULL,       0,            True,        -1 },
+    { "Xmessage",           NULL,       NULL,       0,            True,        -1 },
+    { "Java",               NULL,       NULL,       0,            True,        0  },
+    { "Sublime",            NULL,       NULL,       1 << 0,       False,       1  },
+    { "jetbrains-phpstorm", NULL,       NULL,       1 << 0,       False,       1  },
+    { "Gedit",              NULL,       NULL,       1 << 0,       False,       0  },
+    { "Thunderbird",        NULL,       NULL,       1 << 1,       False,       0  },
+    { "Pidgin",             NULL,       NULL,       1 << 4,       False,       0  },
+    { "Skype",              NULL,       NULL,       1 << 1,       False,       0  },
+    { "Slack",              NULL,       NULL,       1 << 1,       False,       0  },
+    { "Eclipse",            NULL,       NULL,       1 << 1,       False,       1  },
+    { "Firefox",            NULL,       NULL,       1 << 2,       False,       -1 },
+    { "Audacious",          NULL,       NULL,       1 << 3,       False,       0  },
+    { "Google-chrome",      NULL,       NULL,       1 << 2,       False,       1  },
 };
 
 /* layout(s) */
@@ -81,9 +82,9 @@ static const char *webcmd[] = { "firefox", NULL };
 static const char *fixkbcmd[] = { "fixkb", NULL };
 
 /* monitor configurations */
-static const char *leftmoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "HDMI1", "--left-of", "eDP1", "--auto", NULL };
-static const char *rightmoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "HDMI1", "--right-of", "eDP1", "--auto", NULL };
-static const char *nomoncmd[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "HDMI1", "--off", NULL };
+static const char *leftmoncmd[] = { "xrandr-auto", "left", NULL };
+static const char *rightmoncmd[] = { "xrandr-auto", "right", NULL };
+static const char *nomoncmd[] = { "xrandr-auto", "off", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
