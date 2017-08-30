@@ -20,6 +20,10 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 #include "flextile.h"
 #include "movestack.c"
 
+/*
+ * use xprop to get the WM_CLASS and WM_NAME values for a window -
+ * a meaningful substring of these is used to match "class"
+ */
 static const Rule rules[] = {
     /* class           instance    title       tags mask     isfloating   monitor */
     { "Gimp",               NULL,       NULL,       0,            True,        -1 },
