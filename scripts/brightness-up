@@ -1,4 +1,5 @@
 #!/bin/bash
 b=$(cat /sys/class/backlight/intel_backlight/brightness)
+if (( $b + 100 >= 900 )); then exit 2; fi
 echo $(( $b + 100 )) > /sys/class/backlight/intel_backlight/brightness
 
