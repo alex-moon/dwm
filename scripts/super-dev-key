@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cmds="gedit terminator firefox google-chrome thunderbird phpstorm slack"
+cmds="gedit terminator firefox google-chrome thunderbird phpstorm slack postman"
 
 cleanup() {
   for cmd in ${cmds[@]}; do

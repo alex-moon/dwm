@@ -25,7 +25,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
  * a meaningful substring of these is used to match "class"
  */
 static const Rule rules[] = {
-    /* class           instance    title       tags mask     isfloating   monitor */
+    /* class                instance    title       tags mask     isfloating   monitor */
     { "Gimp",               NULL,       NULL,       0,            True,        -1 },
     { "Xmessage",           NULL,       NULL,       0,            True,        -1 },
     { "Java",               NULL,       NULL,       0,            True,        0  },
@@ -40,6 +40,7 @@ static const Rule rules[] = {
     { "Firefox",            NULL,       NULL,       1 << 2,       False,       -1 },
     { "Audacious",          NULL,       NULL,       1 << 3,       False,       0  },
     { "Google-chrome",      NULL,       NULL,       1 << 2,       False,       1  },
+    { "Postman",            NULL,       NULL,       1 << 4,       False,       0  },
 };
 
 /* layout(s) */
