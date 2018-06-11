@@ -40,12 +40,12 @@ static const Rule rules[] = {
     { "Audacious",          NULL,       NULL,       1 << 3,       False,       0  },
     { "Google-chrome",      NULL,       NULL,       1 << 2,       False,       1  },
     { "Postman",            NULL,       NULL,       1 << 4,       False,       0  },
-    { "jetbrains-phpstorm", NULL,       NULL,       1 << 0,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "eyes",     1 << 0,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "brain",    1 << 1,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "palm",     1 << 3,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "printed",  1 << 4,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "foot",     1 << 5,       False,       1  },
+    { "jetbrains-phpstorm", NULL,       NULL,       1 << 0,       False,       1  },
 };
 
 /* layout(s) */
