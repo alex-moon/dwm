@@ -34,10 +34,12 @@
 #include <X11/keysym.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#include <X11/XKBlib.h>
 #include <X11/Xproto.h>
 #include <X11/Xutil.h>
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
+#include <X11/extensions/Xrandr.h>
 #endif /* XINERAMA */
 
 /* macros */
@@ -122,26 +124,6 @@ typedef struct {
 	void (*arrange)(Monitor *);
 } Layout;
 
-struct Monitor {
-	char ltsymbol[16];
-	float mfact;
-	int num;
-	int by;               /* bar geometry */
-	int mx, my, mw, mh;   /* screen size */
-	int wx, wy, ww, wh;   /* window area  */
-	unsigned int seltags;
-	unsigned int sellt;
-	unsigned int tagset[2];
-	Bool showbar;
-	Bool topbar;
-	Client *clients;
-	Client *sel;
-	Client *stack;
-	Monitor *next;
-	Window barwin;
-	const Layout *lt[2];
-};
-
 typedef struct {
 	const char *class;
 	const char *instance;
@@ -157,6 +139,7 @@ static Bool applysizehints(Client *c, int *x, int *y, int *w, int *h, Bool inter
 static void arrange(Monitor *m);
 static void arrangemon(Monitor *m);
 static void attach(Client *c);
+static void attachaside(Client *c);
 static void attachstack(Client *c);
 static void buttonpress(XEvent *e);
 static void checkotherwm(void);
@@ -172,7 +155,11 @@ static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
 static void die(const char *errstr, ...);
-static Monitor *dirtomon(int dir);
+// dirtomon() handles iterating back and forth through monitors
+// @param dir as in "direction" - 1 for forward, -1 for backward
+// see http://git.suckless.org/dwm/tree/dwm.c#n677 for implementation if needed
+// static Monitor *dirtomon(int dir);
+static Monitor *idxtomon(unsigned int n);
 static void drawbar(Monitor *m);
 static void drawbars(void);
 static void drawsquare(Bool filled, Bool empty, Bool invert, unsigned long col[ColLast]);
@@ -207,6 +194,7 @@ static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
 static void restack(Monitor *m);
 static void run(void);
+static void rrscreenchangenotify(XEvent *e);
 static void scan(void);
 static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
@@ -256,6 +244,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[ClientMessage] = clientmessage,
 	[ConfigureRequest] = configurerequest,
 	[ConfigureNotify] = configurenotify,
+	[RRScreenChangeNotify] = rrscreenchangenotify,
 	[DestroyNotify] = destroynotify,
 	[EnterNotify] = enternotify,
 	[Expose] = expose,
@@ -409,6 +398,17 @@ void
 attach(Client *c) {
 	c->next = c->mon->clients;
 	c->mon->clients = c;
+}
+
+void
+attachaside(Client *c) {
+	Client *at = nexttiled(c->mon->clients);
+	if(c->mon->sel == NULL || c->mon->sel->isfloating || !at) {
+		attach(c);
+		return;
+	}
+	c->next = at->next;
+	at->next = c;
 }
 
 void
@@ -610,6 +610,7 @@ configurerequest(XEvent *e) {
 
 Monitor *
 createmon(void) {
+  unsigned int i;
 	Monitor *m;
 
 	if(!(m = (Monitor *)calloc(1, sizeof(Monitor))))
@@ -621,6 +622,21 @@ createmon(void) {
 	m->lt[0] = &layouts[0];
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
 	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
+	m->ltaxis[0] = layoutaxis[0];
+	m->ltaxis[1] = layoutaxis[1];
+	m->ltaxis[2] = layoutaxis[2];
+	m->msplit = 1;
+	/* init tags, bars, layouts, axes, msplits and mfacts */
+  m->curtag = m->prevtag = 1;
+  for(i = 0; i < LENGTH(tags) + 1; i++){
+    m->showbars[i] = m->showbar;
+    m->lts[i] = &layouts[0];
+    m->mfacts[i] = m->mfact;
+    m->ltaxes[i][0] = m->ltaxis[0];
+    m->ltaxes[i][1] = m->ltaxis[1];
+    m->ltaxes[i][2] = m->ltaxis[2];
+    m->msplits[i] = m->msplit;
+  }
 	return m;
 }
 
@@ -665,19 +681,12 @@ die(const char *errstr, ...) {
 }
 
 Monitor *
-dirtomon(int dir) {
-	Monitor *m = NULL;
+idxtomon(unsigned int n) {
+	unsigned int i;
+	Monitor *m;
 
-	if(dir > 0) {
-		if(!(m = selmon->next))
-			m = mons;
-	}
-	else {
-		if(selmon == mons)
-			for(m = mons; m->next; m = m->next);
-		else
-			for(m = mons; m->next != selmon; m = m->next);
-	}
+	for(m = mons, i = 0; m && i != n; m = m->next, i++);
+
 	return m;
 }
 
@@ -853,7 +862,7 @@ focusmon(const Arg *arg) {
 
 	if(!mons->next)
 		return;
-	if((m = dirtomon(arg->i)) == selmon)
+	if((m = idxtomon(arg->i)) == selmon)
 		return;
 	unfocus(selmon->sel, True);
 	selmon = m;
@@ -1000,12 +1009,10 @@ initfont(const char *fontstr) {
 		XFreeStringList(missing);
 	}
 	if(dc.font.set) {
-		XFontSetExtents *font_extents;
 		XFontStruct **xfonts;
 		char **font_names;
 
 		dc.font.ascent = dc.font.descent = 0;
-		font_extents = XExtentsOfFontSet(dc.font.set);
 		n = XFontsOfFontSet(dc.font.set, &xfonts, &font_names);
 		for(i = 0, dc.font.ascent = 0, dc.font.descent = 0; i < n; i++) {
 			dc.font.ascent = MAX(dc.font.ascent, (*xfonts)->ascent);
@@ -1058,7 +1065,7 @@ keypress(XEvent *e) {
 	XKeyEvent *ev;
 
 	ev = &e->xkey;
-	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
+	keysym = XkbKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0, 0);
 	for(i = 0; i < LENGTH(keys); i++)
 		if(keysym == keys[i].keysym
 		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
@@ -1148,7 +1155,7 @@ manage(Window w, XWindowAttributes *wa) {
 		c->isfloating = c->oldstate = trans != None || c->isfixed;
 	if(c->isfloating)
 		XRaiseWindow(dpy, c->win);
-	attach(c);
+	attachaside(c);
 	attachstack(c);
 	XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
 	XMapWindow(dpy, c->win);
@@ -1441,6 +1448,14 @@ run(void) {
 }
 
 void
+rrscreenchangenotify(XEvent *e) {
+	fprintf(stderr, "dwm: poopy fuck butts lol shits");
+	char *poo[] = { "xrandr", "--output", "eDP1", "--primary", "--auto", "--output", "DP1-3", "--right-of", "eDP1", "--auto", NULL };
+	Arg butt = {.v = poo};
+	spawn (&butt);
+}
+
+void
 scan(void) {
 	unsigned int i, num;
 	Window d1, d2, *wins = NULL;
@@ -1475,8 +1490,10 @@ sendmon(Client *c, Monitor *m) {
 	detachstack(c);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
-	attach(c);
+	attachaside(c);
 	attachstack(c);
+	unfocus(selmon->sel, True);
+	selmon = m;
 	focus(NULL);
 	arrange(NULL);
 }
@@ -1494,7 +1511,7 @@ setlayout(const Arg *arg) {
 	if(!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
 		selmon->sellt ^= 1;
 	if(arg && arg->v)
-		selmon->lt[selmon->sellt] = (Layout *)arg->v;
+		selmon->lt[selmon->sellt] = selmon->lts[selmon->curtag] = (Layout *)arg->v;
 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
 	if(selmon->sel)
 		arrange(selmon);
@@ -1512,14 +1529,14 @@ setmfact(const Arg *arg) {
 	f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
 	if(f < 0.1 || f > 0.9)
 		return;
-	selmon->mfact = f;
+	selmon->mfact = selmon->mfacts[selmon->curtag] = f;
 	arrange(selmon);
 }
 
 void
 setup(void) {
 	XSetWindowAttributes wa;
-
+ 
 	/* clean up any zombies immediately */
 	sigchld(0);
 
@@ -1555,7 +1572,6 @@ setup(void) {
 	XSetLineAttributes(dpy, dc.gc, 1, LineSolid, CapButt, JoinMiter);
 	if(!dc.font.set)
 		XSetFont(dpy, dc.gc, dc.font.xfont->fid);
-	/* init bars */
 	updatebars();
 	updatestatus();
 	/* EWMH support per view */
@@ -1568,6 +1584,9 @@ setup(void) {
 	                |PropertyChangeMask;
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
+#ifdef XINERAMA
+	// XRRSelectInput(dpy, root, RRScreenChangeNotifyMask);
+#endif /* XINERAMA */
 	grabkeys();
 }
 
@@ -1613,6 +1632,7 @@ tag(const Arg *arg) {
 	if(selmon->sel && arg->ui & TAGMASK) {
 		selmon->sel->tags = arg->ui & TAGMASK;
 		arrange(selmon);
+		view(arg);
 	}
 }
 
@@ -1620,7 +1640,7 @@ void
 tagmon(const Arg *arg) {
 	if(!selmon->sel || !mons->next)
 		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
+	sendmon(selmon->sel, idxtomon(arg->i));
 }
 
 int
@@ -1635,38 +1655,8 @@ textnw(const char *text, unsigned int len) {
 }
 
 void
-tile(Monitor *m) {
-	int x, y, h, w, mw;
-	unsigned int i, n;
-	Client *c;
-
-	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if(n == 0)
-		return;
-	/* master */
-	c = nexttiled(m->clients);
-	mw = m->mfact * m->ww;
-	resize(c, m->wx, m->wy, (n == 1 ? m->ww : mw) - 2 * c->bw, m->wh - 2 * c->bw, False);
-	if(--n == 0)
-		return;
-	/* tile stack */
-	x = (m->wx + mw > c->x + c->w) ? c->x + c->w + 2 * c->bw : m->wx + mw;
-	y = m->wy;
-	w = (m->wx + mw > c->x + c->w) ? m->wx + m->ww - x : m->ww - mw;
-	h = m->wh / n;
-	if(h < bh)
-		h = m->wh;
-	for(i = 0, c = nexttiled(c->next); c; c = nexttiled(c->next), i++) {
-		resize(c, x, y, w - 2 * c->bw, /* remainder */ ((i + 1 == n)
-		       ? m->wy + m->wh - y - 2 * c->bw : h - 2 * c->bw), False);
-		if(h != m->wh)
-			y = c->y + HEIGHT(c);
-	}
-}
-
-void
 togglebar(const Arg *arg) {
-	selmon->showbar = !selmon->showbar;
+	selmon->showbar = selmon->showbars[selmon->curtag] = !selmon->showbar;
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
@@ -1686,12 +1676,31 @@ togglefloating(const Arg *arg) {
 void
 toggletag(const Arg *arg) {
 	unsigned int newtags;
+	unsigned int i;
 
 	if(!selmon->sel)
 		return;
 	newtags = selmon->sel->tags ^ (arg->ui & TAGMASK);
 	if(newtags) {
 		selmon->sel->tags = newtags;
+		if(newtags == ~0) {
+			selmon->prevtag = selmon->curtag;
+			selmon->curtag = 0;
+		}
+		if(!(newtags & 1 << (selmon->curtag - 1))) {
+			selmon->prevtag = selmon->curtag;
+			for (i=0; !(newtags & 1 << i); i++);
+			selmon->curtag = i + 1;
+		}
+		selmon->sel->tags = newtags;
+		selmon->lt[selmon->sellt] = selmon->lts[selmon->curtag];
+		selmon->mfact = selmon->mfacts[selmon->curtag];
+		if (selmon->showbar != selmon->showbars[selmon->curtag])
+			togglebar(NULL);
+		selmon->ltaxis[0] = selmon->ltaxes[selmon->curtag][0];
+		selmon->ltaxis[1] = selmon->ltaxes[selmon->curtag][1];
+		selmon->ltaxis[2] = selmon->ltaxes[selmon->curtag][2];
+		selmon->msplit = selmon->msplits[selmon->curtag];
 		arrange(selmon);
 	}
 }
@@ -1832,7 +1841,7 @@ updategeom(void) {
 					m->clients = c->next;
 					detachstack(c);
 					c->mon = mons;
-					attach(c);
+					attachaside(c);
 					attachstack(c);
 				}
 				if(m == selmon)
@@ -1959,11 +1968,33 @@ updatewmhints(Client *c) {
 
 void
 view(const Arg *arg) {
+	unsigned int i;
+
 	if((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
 	selmon->seltags ^= 1; /* toggle sel tagset */
-	if(arg->ui & TAGMASK)
+	if(arg->ui & TAGMASK) {
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
+		selmon->prevtag = selmon->curtag;
+		if(arg->ui == ~0)
+			selmon->curtag = 0;
+		else {
+			for (i=0; !(arg->ui & 1 << i); i++);
+			selmon->curtag = i + 1;
+		}
+	} else {
+		selmon->prevtag = selmon->curtag ^ selmon->prevtag;
+		selmon->curtag ^= selmon->prevtag;
+		selmon->prevtag = selmon->curtag ^ selmon->prevtag;
+	}
+	selmon->lt[selmon->sellt] = selmon->lts[selmon->curtag];
+	selmon->mfact = selmon->mfacts[selmon->curtag];
+	if(selmon->showbar != selmon->showbars[selmon->curtag])
+		togglebar(NULL);
+	selmon->ltaxis[0] = selmon->ltaxes[selmon->curtag][0];
+	selmon->ltaxis[1] = selmon->ltaxes[selmon->curtag][1];
+	selmon->ltaxis[2] = selmon->ltaxes[selmon->curtag][2];
+	selmon->msplit = selmon->msplits[selmon->curtag];
 	arrange(selmon);
 }
 
