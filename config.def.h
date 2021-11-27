@@ -26,26 +26,24 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
  */
 static const Rule rules[] = {
     /* class                instance    title       tags mask     isfloating   monitor */
-    { "Gimp",               NULL,       NULL,       0,            True,        -1 },
+    { "Gimp",               NULL,       NULL,       1 << 5,       False,       -1 },
     { "Xmessage",           NULL,       NULL,       0,            True,        -1 },
     { "Java",               NULL,       NULL,       0,            True,        0  },
     { "Sublime",            NULL,       NULL,       1 << 0,       False,       1  },
     { "Gedit",              NULL,       NULL,       1 << 0,       False,       0  },
     { "Thunderbird",        NULL,       NULL,       1 << 1,       False,       0  },
-    { "Pidgin",             NULL,       NULL,       1 << 4,       False,       0  },
-    { "Skype",              NULL,       NULL,       1 << 1,       False,       0  },
+    { "Kazam",              NULL,       NULL,       0,            True,        -1 },
+    { "kazam",              NULL,       NULL,       0,            True,        -1 },
     { "Slack",              NULL,       NULL,       1 << 1,       False,       0  },
     { "Eclipse",            NULL,       NULL,       1 << 1,       False,       1  },
     { "Firefox",            NULL,       NULL,       1 << 2,       False,       -1 },
+    { "firefox",            NULL,       NULL,       1 << 2,       False,       -1 },
     { "Audacious",          NULL,       NULL,       1 << 3,       False,       0  },
-    { "Google-chrome",      NULL,       NULL,       1 << 2,       False,       1  },
+    { "Google-chrome",      NULL,       NULL,       1 << 6,       False,       0  },
     { "Postman",            NULL,       NULL,       1 << 4,       False,       0  },
-    { "jetbrains-phpstorm", NULL,       "eyes",     1 << 0,       False,       1  },
-    { "jetbrains-phpstorm", NULL,       "brain",    1 << 1,       False,       1  },
-    { "jetbrains-phpstorm", NULL,       "palm",     1 << 3,       False,       1  },
-    { "jetbrains-phpstorm", NULL,       "printed",  1 << 4,       False,       1  },
-    { "jetbrains-phpstorm", NULL,       "foot",     1 << 5,       False,       1  },
-    { "jetbrains-phpstorm", NULL,       NULL,       1 << 0,       False,       1  },
+    { "jetbrains-phpstorm", NULL,       "pc-app",   1 << 0,       False,       0  },
+    { "jetbrains-phpstorm", NULL,       "pc-api",   1 << 1,       False,       0  },
+    { "jetbrains-pycharm", NULL,        NULL,       1 << 6,       False,       0  },
 };
 
 /* layout(s) */
@@ -78,7 +76,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
-static const char *settingscmd[]  = { "unity-control-center", NULL };
+static const char *settingscmd[]  = { "config", NULL };
 static const char *lockcmd[]  = { "xscreensaver-command", "-lock", NULL };
 static const char *shortcutscmd[]  = { "super-shortcuts-key", NULL };
 static const char *superdevcmd[] = { "super-dev-key", NULL };
@@ -87,6 +85,7 @@ static const char *brightnessupcmd[] = { "buf", NULL };
 static const char *brightnessdowncmd[] = { "bdf", NULL };
 static const char *volumeupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *volumedowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
+static const char *volumemutecmd[] = { "amixer", "-D", "pulse", "sset", "Master", "10%-", NULL };
 static const char *fmcmd[] = { "pcmanfm", NULL };
 static const char *webcmd[] = { "firefox", NULL };
 static const char *fixkbcmd[] = { "fixkb", NULL };
@@ -110,15 +109,15 @@ static Key keys[] = {
     { MODKEY,                       XK_Down,   setmfact,       {.f = +0.05} },
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
-    { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+    { MODKEY,                       XK_w,      killclient,     {0} },
     { MODKEY,                       XK_z,      setlayout,      {.v = &layouts[0]} },  // tiling layout
     { MODKEY,                       XK_x,      setlayout,      {.v = &layouts[2]} },  // master layout
 //  { MODKEY,                       XK_space,  setlayout,      {0} },
     { MODKEY,                       XK_space,  togglefloating, {0} },
     { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
     { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-    { MODKEY,                       XK_q,      focusmon,       {.i = 0 } },
-    { MODKEY,                       XK_w,      focusmon,       {.i = 1 } },
+//  { MODKEY,                       XK_q,      focusmon,       {.i = 0 } },
+//  { MODKEY,                       XK_w,      focusmon,       {.i = 1 } },
     { MODKEY|ShiftMask,             XK_q,      tagmon,         {.i = 0 } },
     { MODKEY|ShiftMask,             XK_w,      tagmon,         {.i = 1 } },
     TAGKEYS(                        XK_1,                      0)
@@ -152,8 +151,9 @@ static Key keys[] = {
     { MODKEY,                       XK_f,      spawn,          {.v = shortcutscmd } },
     { MODKEY,                       XK_n,      spawn,          {.v = brightnessdowncmd } },
     { MODKEY,                       XK_m,      spawn,          {.v = brightnessupcmd } },
-    { MODKEY,                       XK_c,      spawn,          {.v = volumedowncmd } },
-    { MODKEY,                       XK_v,      spawn,          {.v = volumeupcmd } },
+    { MODKEY,                       XK_F10,    spawn,          {.v = volumemutecmd } },
+    { MODKEY,                       XK_F11,    spawn,          {.v = volumedowncmd } },
+    { MODKEY,                       XK_F12,    spawn,          {.v = volumeupcmd } },
     // monitor configs
     { MODKEY|ControlMask|ShiftMask, XK_Left,   spawn,          {.v = leftmoncmd } },
     { MODKEY|ControlMask|ShiftMask, XK_Right,  spawn,          {.v = rightmoncmd } },

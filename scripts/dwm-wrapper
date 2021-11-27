@@ -1,15 +1,16 @@
 #!/bin/bash
 
 dwm > /var/log/dwm/dwm.log 2> /var/log/dwm/error.log &
-/opt/flux/xflux -l 55 -k 2500
 
-xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
-xrandr --addmode HDMI1 1920x1080_60.00
-xrandr --output HDMI1 --mode 1920x1080_60.00
-xrandr-auto right
+# xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+# xrandr --addmode HDMI1 1920x1080_60.00
+# xrandr --output HDMI1 --mode 1920x1080_60.00
+# xrandr-auto right
 
 xset r rate 200 120
-feh --bg-fill /home/amoon/Desktop/miscellanea/desktop.jpg
+compton &
+redshift &
+feh --bg-fill /home/alex/Desktop/miscellanea/desktop.jpg
 setxkbmap -layout gb
 xscreensaver -no-splash &
 
@@ -34,8 +35,8 @@ cat > /tmp/shortcuts.txt <<EOF
     alt + Enter             swap to master                  --------
                                                             alt + P                 launcher
     Monitor Configuration                                   alt + [num]             switch to tag
-    ---------------------                                   alt + C                 volume down
-    alt + shift + Left      monitor on left                 alt + V                 volume up
+    ---------------------                                   alt + F11               volume down
+    alt + shift + Left      monitor on left                 alt + F12               volume up
     alt + shift + Right     monitor on right                alt + N                 brightness down
     alt + shift + Down      no monitor                      alt + M                 brightness up
 
