@@ -10,7 +10,7 @@ dwm > /var/log/dwm/dwm.log 2> /var/log/dwm/error.log &
 xset r rate 200 120
 compton &
 redshift &
-feh --bg-fill /home/alex/Desktop/miscellanea/desktop.jpg
+feh --bg-fill /home/alex/Desktop/miscellanea/desktop.png
 setxkbmap -layout gb
 xscreensaver -no-splash &
 
