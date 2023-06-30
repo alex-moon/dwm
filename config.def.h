@@ -35,13 +35,13 @@ static const Rule rules[] = {
     { "google-chrome",      NULL,       NULL,       1 << 2,       False,       1  },
     { "Audacious",          NULL,       NULL,       1 << 3,       False,       1  },
     { "Postman",            NULL,       NULL,       1 << 4,       False,       1  },
+    { "sandtrix",           NULL,       NULL,       1 << 5,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "pc-app",   1 << 0,       False,       0  },
     { "jetbrains-phpstorm", NULL,       "pc-api",   1 << 1,       False,       0  },
-    { "jetbrains-pycharm",  NULL,       "pc-data",  1 << 2,       False,       0  },
-    { "jetbrains-pycharm",  NULL,       "pc-ai",    1 << 3,       False,       0  },
-    { "jetbrains-idea-ce",  NULL,       NULL,       1 << 4,       False,       0  },
-    { "rstudio",            NULL,       NULL,       1 << 5,       False,       0  },
-    { "sandtrix",           NULL,       NULL,       1 << 5,       False,       1  },
+    { "jetbrains-pycharm",  NULL,       "pc-data",  1 << 3,       False,       0  },
+    { "jetbrains-pycharm",  NULL,       "pc-ai",    1 << 4,       False,       0  },
+    { "jetbrains-idea-ce",  NULL,       NULL,       1 << 5,       False,       0  },
+    { "rstudio",            NULL,       NULL,       1 << 6,       False,       0  },
 };
 
 /* layout(s) */
