@@ -26,24 +26,22 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
  */
 static const Rule rules[] = {
     /* class                instance    title       tags mask     isfloating   monitor */
-    { "Gimp",               NULL,       NULL,       1 << 5,       False,       -1 },
-    { "Xmessage",           NULL,       NULL,       0,            True,        -1 },
-    { "Java",               NULL,       NULL,       0,            True,        0  },
-    { "Sublime",            NULL,       NULL,       1 << 0,       False,       1  },
-    { "Gedit",              NULL,       NULL,       1 << 0,       False,       0  },
-    { "Thunderbird",        NULL,       NULL,       1 << 1,       False,       0  },
-    { "Kazam",              NULL,       NULL,       0,            True,        -1 },
-    { "kazam",              NULL,       NULL,       0,            True,        -1 },
-    { "Slack",              NULL,       NULL,       1 << 1,       False,       0  },
-    { "Eclipse",            NULL,       NULL,       1 << 1,       False,       1  },
-    { "Firefox",            NULL,       NULL,       1 << 2,       False,       -1 },
-    { "firefox",            NULL,       NULL,       1 << 2,       False,       -1 },
-    { "Google-chrome",      NULL,       NULL,       1 << 2,       False,       0  },
-    { "Audacious",          NULL,       NULL,       1 << 3,       False,       0  },
-    { "Postman",            NULL,       NULL,       1 << 4,       False,       0  },
+    { "Gimp",               NULL,       NULL,       1 << 5,       False,       1 },
+    { "Xmessage",           NULL,       NULL,       0,            True,        1 },
+    { "Java",               NULL,       NULL,       0,            True,        1  },
+    { "Firefox",            NULL,       NULL,       1 << 2,       False,       1 },
+    { "firefox",            NULL,       NULL,       1 << 2,       False,       1 },
+    { "Google-chrome",      NULL,       NULL,       1 << 2,       False,       1  },
+    { "google-chrome",      NULL,       NULL,       1 << 2,       False,       1  },
+    { "Audacious",          NULL,       NULL,       1 << 3,       False,       1  },
+    { "Postman",            NULL,       NULL,       1 << 4,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "pc-app",   1 << 0,       False,       0  },
     { "jetbrains-phpstorm", NULL,       "pc-api",   1 << 1,       False,       0  },
-    { "jetbrains-pycharm", NULL,        NULL,       1 << 6,       False,       0  },
+    { "jetbrains-pycharm",  NULL,       "pc-data",  1 << 2,       False,       0  },
+    { "jetbrains-pycharm",  NULL,       "pc-ai",    1 << 3,       False,       0  },
+    { "jetbrains-idea-ce",  NULL,       NULL,       1 << 4,       False,       0  },
+    { "rstudio",            NULL,       NULL,       1 << 5,       False,       0  },
+    { "sandtrix",           NULL,       NULL,       1 << 5,       False,       1  },
 };
 
 /* layout(s) */
