@@ -26,7 +26,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
  */
 static const Rule rules[] = {
     /* class                instance    title       tags mask     isfloating   monitor */
-    { "Gimp",               NULL,       NULL,       1 << 5,       False,       1 },
+    { "Gimp",               NULL,       NULL,       1 << 5,       False,       0 },
     { "Xmessage",           NULL,       NULL,       0,            True,        1 },
     { "Java",               NULL,       NULL,       0,            True,        1  },
     { "Firefox",            NULL,       NULL,       1 << 2,       False,       1 },
@@ -36,6 +36,7 @@ static const Rule rules[] = {
     { "Audacious",          NULL,       NULL,       1 << 3,       False,       1  },
     { "Postman",            NULL,       NULL,       1 << 4,       False,       1  },
     { "sandtrix",           NULL,       NULL,       1 << 5,       False,       1  },
+    { "libreoffice",        NULL,       NULL,       1 << 5,       False,       1  },
     { "jetbrains-phpstorm", NULL,       "pc-app",   1 << 0,       False,       0  },
     { "jetbrains-phpstorm", NULL,       "pc-api",   1 << 1,       False,       0  },
     { "jetbrains-pycharm",  NULL,       "pc-data",  1 << 3,       False,       0  },
@@ -107,17 +108,18 @@ static Key keys[] = {
     { MODKEY,                       XK_Down,   setmfact,       {.f = +0.05} },
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
-    { MODKEY,                       XK_w,      killclient,     {0} },
+//  { MODKEY,                       XK_w,      killclient,     {0} },
     { MODKEY,                       XK_z,      setlayout,      {.v = &layouts[0]} },  // tiling layout
     { MODKEY,                       XK_x,      setlayout,      {.v = &layouts[2]} },  // master layout
 //  { MODKEY,                       XK_space,  setlayout,      {0} },
     { MODKEY,                       XK_space,  togglefloating, {0} },
     { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
     { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-//  { MODKEY,                       XK_q,      focusmon,       {.i = 0 } },
-//  { MODKEY,                       XK_w,      focusmon,       {.i = 1 } },
-    { MODKEY|ShiftMask,             XK_q,      tagmon,         {.i = 0 } },
-    { MODKEY|ShiftMask,             XK_w,      tagmon,         {.i = 1 } },
+//  { MODKEY,                       XK_w,      focusmon,       {.i = 0 } },
+//  { MODKEY,                       XK_q,      focusmon,       {.i = 1 } },
+    { MODKEY|ShiftMask,             XK_w,      tagmon,         {.i = 0 } },
+    { MODKEY|ShiftMask,             XK_q,      tagmon,         {.i = 1 } },
+    { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
     TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
