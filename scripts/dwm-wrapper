@@ -6,6 +6,7 @@ dwm > /var/log/dwm/dwm.log 2> /var/log/dwm/error.log &
 # xrandr --addmode HDMI1 1920x1080_60.00
 # xrandr --output HDMI1 --mode 1920x1080_60.00
 # xrandr-auto right
+xrandr --output HDMI-0 --primary --mode 1920x1080 --output DP-0 --left-of HDMI-0
 
 xset r rate 200 120
 compton &
