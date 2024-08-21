@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cmds="terminator firefox pycharm phpstorm postman audacious barrier"
+cmds="terminator firefox phpstorm postman audacious barrier"
 
 cleanup() {
   for cmd in ${cmds[@]}; do
