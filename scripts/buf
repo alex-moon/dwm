@@ -1,0 +1,5 @@
+#!/bin/bash
+while true; do
+    bu 2> /dev/null || exit
+done
+

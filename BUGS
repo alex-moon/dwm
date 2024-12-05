@@ -92,6 +92,6 @@ resolution, but the information to be printed on the bar is
 right-aligned for a longer bar. So what I see is a bar that has the
 right hand side of it cut-off. See attached screenshot.
 
-I am using standard options for xrandr such as --output VGA1 --auto, etc.
+I am using standard options for xrandr such as --output DP1-3 --auto, etc.
 
 ---

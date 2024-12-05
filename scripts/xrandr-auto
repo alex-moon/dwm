@@ -1,0 +1,15 @@
+#!/bin/bash
+main_screen=eDP1
+monitor=$(xrandr --query | grep " connected" | awk '{ print $1 }' | grep -v $main_screen | head -n1)
+
+if [[ "$1" == "left" ]]; then direction="--left-of $main_screen --auto"; fi
+if [[ "$1" == "right" ]]; then direction="--right-of $main_screen --auto"; fi
+if [[ "$1" == "off" ]]; then direction="--off"; fi
+
+if [[ -z "$direction" ]]; then
+    echo "Usage: $0 <left|right|off>"
+    exit 1
+fi
+
+xrandr --output $main_screen --primary --auto --output $monitor $direction
+

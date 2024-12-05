@@ -1,0 +1,65 @@
+#!/bin/bash
+
+dwm > /var/log/dwm/dwm.log 2> /var/log/dwm/error.log &
+
+xrandr --output HDMI-0 --primary --mode 1920x1080 --output DP-0 --mode 1920x1080 --right-of HDMI-0
+
+xset r rate 200 120
+compton &
+redshift &
+feh --bg-fill /home/alex/Desktop/miscellanea/desktop.*
+setxkbmap -layout gb
+xscreensaver -no-splash &
+
+cat > /tmp/shortcuts.txt <<EOF
+
+
+    Move Between Screens                                    Move Between Tiles
+    --------------------                                    ------------------
+    alt + Q                 previous screen                 alt + S                 next tile
+    alt + W                 next screen                     alt + A                 previous tile
+    alt + shift + Q         shift to previous screen        alt + shift + S         shift to next tile
+    alt + shift + W         shift to next screen            alt + shift + A         shift to previous tile    
+
+    Stack/Master                                            Rotate Layout
+    ------------                                            -------------
+    alt + X                 fullscreen                      alt + D                 toggle stack h/v
+    alt + Z                 tiled (default)                 alt + shift + D         rotate stack
+    alt + Left              make stack bigger               alt + ctrl + shift + D  rotate master
+    alt + Right             make stack smaller              alt + shift + Enter     flip layout
+    alt + shift + Left      stack -> master
+    alt + shift + Right     master -> stack                 Etcetera
+    alt + Enter             swap to master                  --------
+                                                            alt + P                 launcher
+    Monitor Configuration                                   alt + [num]             switch to tag
+    ---------------------                                   alt + F11               volume down
+    alt + shift + Left      monitor on left                 alt + F12               volume up
+    alt + shift + Right     monitor on right                alt + N                 brightness down
+    alt + shift + Down      no monitor                      alt + M                 brightness up
+
+    Quick-Launch                                            Super Dev Keys
+    ------------                                            --------------
+    alt + ctrl + Enter      terminator                      alt + ctrl + M          PHP dev
+    alt + ctrl + L          lock screen                     alt + ctrl + N          Java dev
+    alt + ctrl + A          control center
+    alt + ctrl + F          file manager
+    alt + ctrl + W          web browser
+
+
+EOF
+
+xroot() {
+    state=$(upower -i $(upower -e | grep 'BAT') | grep -E "state" | awk '{ print $2 }')
+    tofull=$(upower -i $(upower -e | grep 'BAT') | grep -E "to\ full" | awk '{ print $4 " " $5 }')
+    if [[ ! -z $tofull ]]; then tofull=" ($tofull)"; fi
+    percentage=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | awk '{ print $2 }')
+    date=$(date)
+    echo $percentage $state$tofull - $date
+}
+
+while true; do
+    xsetroot -name "`xroot`"
+    if [[ -z "$(ps -axo comm | grep dwm$)" ]]; then exit; fi
+    sleep 1
+done
+
